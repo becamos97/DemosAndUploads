@@ -17,6 +17,7 @@ function searchHandler(e) {
 	const inputVal = e.target.value; //Gather current value from the input
 	if (inputVal === '' ) {
 		suggestions.innerHTML = '';
+		suggestions.classList.remove ('has-suggestions');
 		return;
 	}
 	console.log("User input:", inputVal);
@@ -28,14 +29,16 @@ function searchHandler(e) {
 function showSuggestions(results, inputVal) {
 	suggestions.innerHTML = ''; //This is to clear previous suggestions
 	console.log("showing suggestions for:", inputVal);
-	
-	results.forEach(results => {
-		console.log("Suggestion:", results);
-		const li = document.createElement('li'); //creating a new list item
-		li.textContent = results;//Setting the text content to the fruit name
-		suggestions.appendChild(li);// appending the list item to the suggestions dropdown
-	
-	});
+	if (results.length > 0 ) { 
+		results.forEach(results => {
+			console.log("Suggestion:", results);
+			const li = document.createElement('li'); //creating a new list item
+			li.textContent = results;//Setting the text content to the fruit name
+			suggestions.appendChild(li);// appending the list item to the suggestions dropdown
+		
+		});
+		suggestions.classList.add ('has-suggestions');
+	} else {suggestions.classList.remove ('has-suggestions');} //this is new
 }
 
 function useSuggestion(e) {
@@ -43,6 +46,7 @@ function useSuggestion(e) {
 		console.log("USer selected:", e.target.textContent);
 		input.value = e.target.textContent; //set the input value to the clicked suggestion
 		suggestions.innerHTML = ''; //clear suggestions
+		suggestions.classList.remove ('has-suggestions');
 		}
 }
 
