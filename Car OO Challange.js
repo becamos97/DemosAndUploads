@@ -34,7 +34,7 @@ class Car extends Vehicle {
 //Part THREE
 
 class Motorcycle extends Vehicle {
-    constructor(make, mode, year) {
+    constructor(make, model, year) {
         super(make, model, year);
         this.numWheels = 2;
     }
@@ -58,7 +58,7 @@ class Garage {
 
     add(vehicle) {
         if (!(vehicle instanceof Vehicle)) {
-            return "Only vehicles are allowed in here!";
+            throw Error ("Only vehicles are allowed in here!");
         }
         if (this.vehicle.length >= this.capacity) {
             return "Sorry, we are full!";
