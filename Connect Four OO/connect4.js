@@ -128,7 +128,8 @@ handleClick(evt) {
   
   // check for win
   if (this.checkForWin()) {
-    this.endGame(`Player with color ${this.currPlayer.color} won!`);//< we are calling the method here
+    setTimeout(() => {
+      this.endGame(`Player with color ${this.currPlayer.color} won!`);},500)//< we are calling the method here
     return; //<Stopping further execution!
   }
   
