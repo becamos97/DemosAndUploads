@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies App</title>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+  <div class="container mt-4">
+    <h1 class="text-center">Movie Ratings App</h1>
+    
+    <!-- Form for adding movies -->
+  <form id="movie-form" class="form-inline mb-4">
+    <div class="form-group">
+      <label for="title">Movie Title:</label>
+      <input type="text" id="title" class="form-control mx-2" placeholder="Enter title" required>
+    </div>
+    <div class="form-group">
+      <label for="rating">Rating:</label>
+      <input type="number" id="rating" class="form-control mx-2" min="0" max="10" placeholder="Enter rating" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Movie</button>
+  </form>
+
+  <!-- Sorting buttons -->
+  <div class="mb-4">
+    <button id="sort-title-asc" class="btn btn-secondary">Sort by Title (A-Z)</button>
+    <button id="sort-title-desc" class="btn btn-secondary">Sort by Title (Z-A)</button>
+    <button id="sort-rating-asc" class="btn btn-secondary">Sort by Rating (Low to High)</button>
+    <button id="sort-rating-desc" class="btn btn-secondary">Sort by Rating (High to Low)</button>
+  </div>
+
+    <!-- List of movies -->
+    <ul id="movie-list" class="list-group"></ul>
+  </div>
+
+  <script>
+    // jQuery code goes here
+    $(document).ready(function() {
+  const movies = [];
+  let id = 0; // A unique ID for each movie
+
+  // Handle form submission
+  $('#movie-form').submit(function(event) {
+    event.preventDefault(); // Prevent form from reloading the page
+
+    // Get the values from the input fields
+    const movieTitle = $('#title').val().trim();
+    const movieRating = $('#rating').val();
+
+    // Title validation: Ensure title has at least 2 characters
+    if (movieTitle.length < 2) {
+      alert("The movie title must be at least 2 characters long.");
+      return; // Stop further execution if validation fails
+    }
+
+    // Add the movie to the movies array with a unique ID
+    movies.push({ id: id++, title: movieTitle, rating: parseFloat(movieRating) });
+
+    // Append the movie to the DOM and clear the form
+    appendMovies(movies);
+
+    $('#title').val('');
+    $('#rating').val('');
+  });
+
+  // Function to append movies to the DOM
+  function appendMovies(movies) {
+    $('#movie-list').empty(); // Clear the list
+    movies.forEach(function(movie) {
+      $('#movie-list').append(`
+        <li class="list-group-item d-flex justify-content-between align-items-center" data-id="${movie.id}">
+          ${movie.title} - Rating: ${movie.rating}/10
+          <button class="btn btn-danger btn-sm remove-movie">Remove</button>
+        </li>
+      `);
+    });
+  }
+
+  // Handle removing a movie
+  $('#movie-list').on('click', '.remove-movie', function() {
+    const movieId = $(this).parent().data('id');
+    const index = movies.findIndex(movie => movie.id === movieId);
+    if (index > -1) {
+      movies.splice(index, 1); // Remove movie from array
+    }
+    appendMovies(movies); // Re-render the list
+  });
+
+  // Sorting movies by title (ascending)
+  $('#sort-title-asc').click(function() {
+    movies.sort((a, b) => a.title.localeCompare(b.title));
+    appendMovies(movies);
+  });
+
+  // Sorting movies by title (descending)
+  $('#sort-title-desc').click(function() {
+    movies.sort((a, b) => b.title.localeCompare(a.title));
+    appendMovies(movies);
+  });
+
+  // Sorting movies by rating (ascending)
+  $('#sort-rating-asc').click(function() {
+    movies.sort((a, b) => a.rating - b.rating);
+    appendMovies(movies);
+  });
+
+  // Sorting movies by rating (descending)
+  $('#sort-rating-desc').click(function() {
+    movies.sort((a, b) => b.rating - a.rating);
+    appendMovies(movies);
+  });
+});
+
+  </script>
+</body>
+</html>
