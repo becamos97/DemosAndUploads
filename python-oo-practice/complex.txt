@@ -1,0 +1,43 @@
+# fruits
+Apple
+Banana
+Orange
+Grape
+Strawberry
+Blueberry
+Pineapple
+Mango
+Peach
+Pear
+Watermelon
+Cantaloupe
+Kiwi
+Papaya
+Cherry
+Plum
+Lemon
+Lime
+Raspberry
+Pomegranate
+
+# veggies
+Carrot
+Broccoli
+Cauliflower
+Spinach
+Kale
+Lettuce
+Tomato
+Cucumber
+Zucchini
+Eggplant
+Bell pepper
+Onion
+Garlic
+Potato
+Sweet potato
+Celery
+Green bean
+Peas
+Asparagus
+Brussels sprouts
