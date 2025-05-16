@@ -1,0 +1,31 @@
+DROP DATABASE
+CREATE DATABASE
+You are now connected to database "outer_space_changed" as user "brandon".
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 2
+INSERT 0 3
+INSERT 0 3
+INSERT 0 2
+  planet   |       star       
+-----------+------------------
+ Earth     | Sun
+ Mars      | Sun
+ Proxima b | Alpha Centauri A
+(3 rows)
+
+  moon  | planet 
+--------+--------
+ Moon   | Earth
+ Phobos | Mars
+ Deimos | Mars
+(3 rows)
+
+     mission     | target_planet | launch_date 
+-----------------+---------------+-------------
+ Apollo 11       | Earth         | 1969-07-16
+ Mars Pathfinder | Mars          | 1996-12-04
+(2 rows)
+
