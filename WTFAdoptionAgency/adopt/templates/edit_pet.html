@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1 class="mb-3">{{ pet.name }}</h1>
+
+  {% if pet.photo_url %}
+    <img src="{{ pet.photo_url }}" alt="{{ pet.name }}" class="img-fluid rounded mb-3" style="max-height:200px;">
+  {% endif %}
+
+  <ul class="list-group mb-4">
+    <li class="list-group-item"><strong>Species:</strong> {{ pet.species }}</li>
+    {% if pet.age is not none %}
+      <li class="list-group-item"><strong>Age:</strong> {{ pet.age }}</li>
+    {% endif %}
+  </ul>
+
+  <form method="POST" class="border p-4 rounded bg-white shadow-sm">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.photo_url.label(class="form-label") }}
+      {{ form.photo_url(class="form-control") }}
+      {% for error in form.photo_url.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.notes.label(class="form-label") }}
+      {{ form.notes(class="form-control") }}
+      {% for error in form.notes.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-check mb-3">
+      {{ form.available(class="form-check-input") }}
+      {{ form.available.label(class="form-check-label") }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a href="/" class="btn btn-secondary ms-2">← Back to homepage</a>
+  </form>
+{% endblock %}

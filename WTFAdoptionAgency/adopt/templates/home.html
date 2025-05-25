@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="display-6">🐾 Pet Adoption Agency</h1>
+    <a href="/add" class="btn btn-primary">Add a Pet</a>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for pet in pets %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          {% if pet.photo_url %}
+            <img src="{{ pet.photo_url }}" class="card-img-top" style="object-fit: cover; height: 200px;" alt="{{ pet.name }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="/{{ pet.id }}">{{ pet.name }}</a>
+            </h5>
+            {% if pet.available %}
+              <p class="text-success fw-bold">Available</p>
+            {% else %}
+              <p class="text-muted">Not available</p>
+            {% endif %}
+            {% if pet.notes %}
+              <p class="card-text">{{ pet.notes }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
